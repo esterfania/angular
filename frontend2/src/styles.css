@@ -3,11 +3,38 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.green {
-    color: #11c76f
+.button-color {
+    color: #ffce89 !important;
+    background-color:  #7c1952;
 }
-
+.itens {
+    margin: 10px 0 10px 0 !important;
+}
 .v-middle{
     vertical-align: middle;
 }
 
+table {
+    width: 100%;
+    margin-top:10px;
+}
+
+.my-snack-bar button {
+    background-color: gray;
+    color: white;
+}
+.corPrimaria {
+        color: #eb7004 !important;
+    }
+
+.corSecundaria {
+        color: #7c1952 !important;
+    }
+
+.corAmarela {
+        color: #ffce89 !important;
+    }
+
+.menuTextColor {
+        color: #ffce89 !important;
+    }

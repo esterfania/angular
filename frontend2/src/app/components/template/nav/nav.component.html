@@ -1,19 +1,21 @@
 <mat-sidenav-container class="container">
-    <mat-sidenav class="sidenav" mode="side" opened 
-        fixedInViewport="true" fixedTopGap="64">
+    <mat-sidenav color="primary" class="sidenav" mode="side" opened fixedInViewport="true" fixedTopGap="64">
         <mat-nav-list class="nav-list">
-            <a mat-list-item routerLink="/">
+            <a mat-list-item routerLink="/comandas">
                 <i class="material-icons">
-                    home
+                    qr_code_2
                 </i>
-                Início
+                Comandas
             </a>
-            <a mat-list-item  routerLink="/products">
+            <a mat-list-item routerLink="/cardapio">
                 <i class="material-icons">
-                    storefront
+                    local_drink
                 </i>
-                Produtos
+                Cardápio
             </a>
         </mat-nav-list>
     </mat-sidenav>
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
 </mat-sidenav-container>
