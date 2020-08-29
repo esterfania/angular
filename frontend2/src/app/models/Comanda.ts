@@ -8,4 +8,5 @@ export interface Comanda {
     dataAberturaComanda: Date;
     dataFechamentoComanda: Date;
     listaItem: ComandaItem[];
+    valorFinal: number;
 }

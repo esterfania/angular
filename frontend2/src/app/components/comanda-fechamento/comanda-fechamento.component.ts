@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ComandaService } from 'src/app/services/comanda.service';
 import { ActivatedRoute } from '@angular/router';
 import { Comanda } from 'src/app/models/Comanda';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-comanda-fechamento',
@@ -10,8 +12,7 @@ import { Comanda } from 'src/app/models/Comanda';
 })
 export class ComandaFechamentoComponet implements OnInit {
     codigoComanda: number;
-    comanda: Comanda;
-    valorFinal: number;
+    comanda$: Observable<Comanda>;
 
     constructor(
         private comandaService: ComandaService,
@@ -24,12 +25,11 @@ export class ComandaFechamentoComponet implements OnInit {
     }
 
     getComanda() {
-        this.comandaService
+        this.comanda$ = this.comandaService
             .recuperarComandaPorCodigo(this.codigoComanda)
-            .subscribe(res => {
-                this.finalizaComanda(res);
-            },
-                err => this.comandaService.showMessage('Um erro ocorreu, por favor tentar novamente!'));
+            .pipe(tap(res => this.finalizaComanda(res), err => this
+                .comandaService
+                .showMessage('Um erro ocorreu, por favor tentar novamente!')));
 
     }
 
@@ -37,9 +37,9 @@ export class ComandaFechamentoComponet implements OnInit {
         return res.map(res => res[campo]).reduce((a, v) => a + v, 0);
     }
     finalizaComanda(res: Comanda) {
-        this.comanda = res;
-        this.comanda.valorTotal = this.reduzirValor(res.listaItem, 'valor');
-        this.comanda.desconto = this.reduzirValor(res.listaItem, 'desconto');
-        this.valorFinal = this.comanda.valorTotal - this.comanda.desconto;
+        res.valorTotal = this.reduzirValor(res.listaItem, 'valor');
+        res.desconto = this.reduzirValor(res.listaItem, 'desconto');
+        res.valorFinal = res.valorTotal - res.desconto;
+        return res;
     }
 }
